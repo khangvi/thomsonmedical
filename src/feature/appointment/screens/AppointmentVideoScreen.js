@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useNavigation } from '@react-navigation/native'
 import { ImageBackground, StyleSheet, Text, View } from 'react-native'
 
 import { Images } from '../../../../assets/images/images'
@@ -10,9 +11,11 @@ import { IconWithBackground } from '../components/IconWithBackground'
 import { LocalVideo } from '../components/LocalVideo'
 
 export const AppointmentVideoScreen = () => {
+  const navigation = useNavigation()
+
   return (
     <ImageBackground resizeMode='cover' style={styles.container} source={Images.doctorAvatarDefault}>
-      <AppScreen childrenStyle={styles.contentContainer}>
+      <AppScreen scrollEnabled={false} onPressBack={navigation.goBack} childrenStyle={styles.contentContainer}>
         <LocalVideo />
         <View style={styles.flexBox} />
         <Text style={styles.doctorName}>Dr. Phil</Text>
@@ -22,7 +25,13 @@ export const AppointmentVideoScreen = () => {
         <View style={ContainerStyle.row}>
           <IconWithBackground bgColor={'#FAFAFA66'} imgSrc={Images.iconRecord} iconSize={16} />
           <SizedBox width={24} />
-          <IconWithBackground bgColor={'#EE574A'} imgSrc={Images.iconDial} iconSize={32} bgSize={72} />
+          <IconWithBackground
+            onPress={navigation.goBack}
+            bgColor={'#EE574A'}
+            imgSrc={Images.iconDial}
+            iconSize={32}
+            bgSize={72}
+          />
           <SizedBox width={24} />
           <IconWithBackground bgColor={'#FAFAFA66'} imgSrc={Images.iconVideo} iconSize={16} />
         </View>
